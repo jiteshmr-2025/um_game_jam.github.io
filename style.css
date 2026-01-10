@@ -1,0 +1,496 @@
+:root {
+    --mc-green: #5ead55;
+    --mc-dirt: #8b542f;
+    --mc-stone: #7d7d7d;
+
+    /* WARM CHARCOAL THEME VARIABLES */
+    --warm-charcoal: #252222;
+    --warm-charcoal-light: #2f2b2b;
+    --warm-border: #3e3838;
+    /* A very subtle warm tint for the inner bevel of boxes */
+    --warm-inner-glow: rgba(255, 240, 220, 0.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    background-color: #111;
+    scroll-behavior: smooth;
+    /* Smooth Scrolling enabled */
+}
+
+body {
+    background-color: transparent;
+    /* Transparent so we see panorama */
+    color: white;
+    font-family: 'Minecraft', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* --- 1. PANORAMA & GLASSMORPHISM --- */
+.panorama-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+}
+
+.panorama-image {
+    height: 100%;
+    width: auto;
+    /* Ensure it's wide enough to pan left/right without running out of image */
+    min-width: 120%;
+    background-size: cover;
+    background-position: center left;
+    /* CHANGED: 120s for a faster, yet still smooth pan */
+    animation: panHorizontalSlow 120s linear infinite alternate;
+}
+
+@keyframes panHorizontalSlow {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-10%);
+    }
+
+    /* Move left by 10% */
+}
+
+.panorama-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    /* Lighter opacity (0.4) to let background show */
+    background: rgba(10, 10, 10, 0.4);
+    /* Glassmorphism blur */
+    backdrop-filter: blur(8px) saturate(90%);
+    -webkit-backdrop-filter: blur(8px) saturate(90%);
+}
+
+/* --- 2. ATMOSPHERIC PARTICLES --- */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    animation: floatUp 25s linear infinite;
+}
+
+.p1 {
+    width: 40px;
+    height: 40px;
+    bottom: -10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.p2 {
+    width: 20px;
+    height: 20px;
+    bottom: -20%;
+    left: 50%;
+    animation-delay: 5s;
+    animation-duration: 35s;
+}
+
+.p3 {
+    width: 60px;
+    height: 60px;
+    bottom: -30%;
+    left: 80%;
+    animation-delay: 10s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.p4 {
+    width: 30px;
+    height: 30px;
+    bottom: -10%;
+    left: 10%;
+    animation-delay: 15s;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+/* --- 3. NAV --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(37, 34, 34, 0.85);
+    /* Warm charcoal tint */
+    border-bottom: 4px solid var(--mc-green);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.logo span {
+    color: var(--mc-green);
+}
+
+.nav-links a {
+    margin-left: 20px;
+    color: #ccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: var(--mc-green);
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* --- 4. HERO SECTION --- */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, transparent 70%);
+}
+
+.mine-logo-container {
+    margin-bottom: 10px;
+}
+
+.mine-logo {
+    font-size: 4rem;
+    color: #eee;
+    text-shadow: 4px 4px 0px #333, 6px 6px 0px #111;
+    letter-spacing: 2px;
+}
+
+.splash-container {
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+.splash-text {
+    font-size: 1.5rem;
+    color: #ffff55;
+    text-shadow: 2px 2px 0px #3f3f00;
+    transform: rotate(-5deg);
+    animation: pulse 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1) rotate(-5deg);
+    }
+
+    100% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* BUTTON ALIGNMENT CONTAINER */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* --- 5. BUTTONS (CLEANED) --- */
+.btn {
+    background: var(--mc-green);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid #fff;
+    box-shadow: 4px 4px 0 #000;
+    transition: 0.1s;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+}
+
+.btn:hover {
+    background: #4ca044;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+.btn-big {
+    font-size: 1.5rem;
+    padding: 15px 40px;
+}
+
+.btn-secondary {
+    background: var(--mc-stone);
+}
+
+/* --- 6. COUNTDOWN --- */
+.countdown-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.time-box {
+    background: var(--warm-charcoal);
+    padding: 10px 20px;
+    border: 2px solid #888;
+    text-align: center;
+    min-width: 80px;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.time-val {
+    font-size: 2rem;
+    display: block;
+    color: var(--mc-green);
+}
+
+.time-label {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* --- 7. CONTENT BOXES --- */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    flex: 1;
+}
+
+.section-title-wrapper {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 4px solid var(--warm-charcoal-light);
+    display: inline-block;
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.pixel-box {
+    background: var(--warm-charcoal);
+    padding: 30px;
+    box-shadow: inset 0 0 0 2px var(--warm-inner-glow), 4px 4px 0 0 #000;
+    border: 2px solid #1a1818;
+    color: #ddd;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.center-content {
+    text-align: center;
+}
+
+.interactive:hover {
+    transform: translateY(-5px);
+    background: var(--warm-charcoal-light);
+}
+
+/* Icons */
+.icon-block {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    display: inline-block;
+}
+
+.redstone {
+    background: #ff5555;
+}
+
+.lapis {
+    background: #5555ff;
+}
+
+.gold {
+    background: #ffff55;
+}
+
+/* Sponsors */
+.sponsor-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sponsor-slot {
+    width: 140px;
+    height: 80px;
+    background: #1a1818;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #444;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+/* Schedule */
+.server-log {
+    list-style: none;
+}
+
+.server-log li {
+    padding: 15px 0;
+    border-bottom: 1px dashed var(--warm-border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.log-time {
+    color: var(--mc-green);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* --- 8. TOOLTIPS --- */
+#mc-tooltip {
+    position: fixed;
+    background: rgba(16, 0, 16, 0.95);
+    border: 2px solid #2d0a63;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: white;
+    font-family: 'Minecraft', sans-serif;
+    font-size: 1rem;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 0 #000;
+}
+
+.tooltip-title {
+    color: #55ffff;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.tooltip-desc {
+    color: #aaaaaa;
+    font-size: 0.8rem;
+    display: block;
+    font-family: sans-serif;
+}
+
+/* --- 9. ABOUT PAGE (READABILITY FIX) --- */
+.handbook-content {
+    /* Standard font for better reading experience */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+.handbook-content strong {
+    color: white;
+}
+
+.handbook-content h3 {
+    font-family: 'Minecraft', sans-serif;
+    margin-top: 30px;
+}
+
+/* --- 10. FOOTER --- */
+footer {
+    background: #111;
+    text-align: center;
+    padding: 40px 0;
+    border-top: 4px solid var(--mc-dirt);
+    margin-top: auto;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .server-log li {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
