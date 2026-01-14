@@ -494,3 +494,72 @@ footer {
         gap: 5px;
     }
 }
+
+/* --- FAQ ACCORDION STYLES --- */
+.faq-container {
+    margin-bottom: 30px;
+}
+
+.accordion {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #eee;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #444;
+    border-bottom: none;
+    outline: none;
+    transition: 0.2s;
+    font-family: 'Minecraft', sans-serif;
+    /* Keep headers in pixel font */
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Add a bottom border to the last one */
+.accordion:last-of-type {
+    border-bottom: 1px solid #444;
+}
+
+/* Active state (when open) */
+.active,
+.accordion:hover {
+    background-color: rgba(94, 173, 85, 0.1);
+    /* Slight green tint */
+    color: var(--mc-green);
+}
+
+/* The arrow icon */
+.accordion:after {
+    content: '>';
+    font-weight: bold;
+    float: right;
+    transition: transform 0.2s;
+}
+
+.active:after {
+    transform: rotate(90deg);
+    /* Rotate arrow down */
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    border-left: 2px solid var(--mc-green);
+    /* Visual indicator on left */
+    border-right: 1px solid #333;
+}
+
+.panel p {
+    margin: 15px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Readable font */
+    font-size: 0.95rem;
+    color: #ccc;
+}

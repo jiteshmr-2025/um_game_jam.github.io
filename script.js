@@ -1,80 +1,119 @@
-// 1. Countdown Logic
-const countDownDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 Days from now
+// --- 1. COUNTDOWN LOGIC ---
+// Target Date: April 15, 2026, 9:45 PM
+const countDownDate = new Date("Apr 15, 2026 21:45:00").getTime();
 
-const x = setInterval(function () {
+// Update the count down every 1 second
+const timerInterval = setInterval(function () {
     const now = new Date().getTime();
     const distance = countDownDate - now;
 
+    // Time calculations
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Add leading zeros
-    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-    document.getElementById("mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+    // GET ALL ELEMENTS SAFELY
+    const dayEl = document.getElementById("days");
+    const hourEl = document.getElementById("hours");
+    const minEl = document.getElementById("minutes");
+    const secEl = document.getElementById("seconds");
 
+    // SAFETY CHECK: Only update if ALL elements exist
+    if (dayEl && hourEl && minEl && secEl) {
+        dayEl.innerText = days;
+        hourEl.innerText = hours;
+        minEl.innerText = minutes;
+        secEl.innerText = seconds;
+    }
+
+    // If countdown is over
     if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "<h3>SERVER IS LIVE!</h3>";
+        clearInterval(timerInterval);
+        const countdownContainer = document.querySelector(".countdown-container");
+        if (countdownContainer) {
+            countdownContainer.innerHTML = "<h2>EVENT STARTED</h2>";
+        }
     }
 }, 1000);
 
-// 2. Random Splash Text (Minecraft Style)
+
+// --- 2. SPLASH TEXT LOGIC ---
 const splashes = [
-    "Theme: [REDACTED]",
-    "Now with 50% more pixels!",
-    "Bring your own coffee!",
+    "Also try Terraria!",
+    "Creeper? Aww man!",
     "Don't dig straight down!",
-    "Sleep is for the weak!",
-    "Creeper? Aww man.",
-    "Java or Bedrock?",
-    "Build The Future!",
-    "Wait, is that a bug or a feature?"
+    "Spline Reticulated!",
+    "Remove Herobrine!",
+    "Technoblade Never Dies!",
+    "Sleep in a bed to set spawn!",
+    "Punching wood!",
+    "Diamonds!",
+    "1.21 Gigawatts!",
+    "Keyboard compatible!",
+    "UM Game Jam!",
+    "Made with Java!",
+    "Gluten Free!"
 ];
 
-const splashElement = document.getElementById("splashText");
-
 function setRandomSplash() {
-    const randomIndex = Math.floor(Math.random() * splashes.length);
-    splashElement.innerText = splashes[randomIndex];
+    const splashEl = document.getElementById("splash-text");
+    if (splashEl) {
+        const randomIndex = Math.floor(Math.random() * splashes.length);
+        splashEl.innerText = splashes[randomIndex];
+    }
 }
 
-// Set initial splash
+// Run immediately on load
 setRandomSplash();
 
-// Optional: Click splash to change it
-splashElement.addEventListener('click', setRandomSplash);
 
 // --- 3. MINECRAFT TOOLTIP LOGIC ---
 const tooltip = document.getElementById('mc-tooltip');
 const interactiveBoxes = document.querySelectorAll('.interactive');
 
-// Move tooltip with mouse
-document.addEventListener('mousemove', (e) => {
-    // Offset by 15px so cursor doesn't cover text
-    const x = e.clientX + 15;
-    const y = e.clientY + 15;
-    
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-});
-
-interactiveBoxes.forEach(box => {
-    box.addEventListener('mouseenter', () => {
-        const title = box.getAttribute('data-title');
-        const desc = box.getAttribute('data-desc');
-        
-        if(title) {
-            tooltip.querySelector('.tooltip-title').innerText = title;
-            tooltip.querySelector('.tooltip-desc').innerText = desc;
-            tooltip.style.display = 'block';
-        }
+if (tooltip) {
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX + 15;
+        const y = e.clientY + 15;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
     });
 
-    box.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
+    interactiveBoxes.forEach(box => {
+        box.addEventListener('mouseenter', () => {
+            const title = box.getAttribute('data-title');
+            const desc = box.getAttribute('data-desc');
+
+            if (title) {
+                tooltip.querySelector('.tooltip-title').innerText = title;
+                tooltip.querySelector('.tooltip-desc').innerText = desc;
+                tooltip.style.display = 'block';
+            }
+        });
+
+        box.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
     });
-});
+}
+
+
+// --- 4. FAQ ACCORDION LOGIC ---
+const accordions = document.getElementsByClassName("accordion");
+
+if (accordions.length > 0) {
+    for (let i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+                if (i === accordions.length - 1) this.style.borderBottom = "1px solid #444";
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                if (i === accordions.length - 1) this.style.borderBottom = "none";
+            }
+        });
+    }
+}
