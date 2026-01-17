@@ -117,3 +117,25 @@ if (accordions.length > 0) {
         });
     }
 }
+
+// --- 5. MOBILE MENU LOGIC ---
+const hamburger = document.getElementById('hamburger-btn');
+const navLinks = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        // Toggle the navigation menu
+        navLinks.classList.toggle('active');
+
+        // Toggle the hamburger animation (turn to X)
+        hamburger.classList.toggle('toggle');
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('toggle');
+        });
+    });
+}

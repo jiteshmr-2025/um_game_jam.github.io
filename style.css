@@ -563,3 +563,142 @@ footer {
     font-size: 0.95rem;
     color: #ccc;
 }
+
+/* =========================================
+   MOBILE & TABLET CONFIGURATIONS
+   ========================================= */
+
+/* 1. HAMBURGER ICON STYLES (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    /* Hidden by default */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 200;
+    /* Above everything */
+}
+
+.bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    box-shadow: 2px 2px 0 #000;
+    /* Minecraft shadow */
+    transition: 0.3s;
+}
+
+/* 2. MEDIA QUERY (Tablets and Phones - Max Width 768px) */
+@media screen and (max-width: 768px) {
+
+    /* --- NAVIGATION SIDEBAR --- */
+    .hamburger {
+        display: flex;
+        /* Show hamburger on mobile */
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 70%;
+        /* Takes up 70% of screen */
+        background-color: #1a1818;
+        /* Dark background */
+        border-left: 4px solid var(--mc-green);
+        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.8);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        /* Animation: Slide out by default */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 150;
+    }
+
+    /* Class added via JS to show menu */
+    .nav-links.active {
+        transform: translateX(0%);
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px dashed #333;
+    }
+
+    /* Animation for Hamburger turning into 'X' */
+    .hamburger.toggle .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-6px, 6px);
+        background-color: var(--mc-green);
+    }
+
+    .hamburger.toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.toggle .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-6px, -6px);
+        background-color: var(--mc-green);
+    }
+
+    /* --- LAYOUT ADJUSTMENTS --- */
+
+    /* Hero Section Text */
+    .mine-logo {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    /* Countdown boxes stack or get smaller */
+    .countdown-container {
+        gap: 10px;
+    }
+
+    .time-box {
+        min-width: 60px;
+        padding: 5px 10px;
+    }
+
+    .time-val {
+        font-size: 1.5rem;
+    }
+
+    /* Grid becomes 1 column */
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Padding adjustments */
+    .container {
+        padding: 40px 15px;
+    }
+
+    /* Hide particles on mobile to save battery/performance */
+    .particles-container {
+        display: none;
+    }
+
+    /* Make buttons full width */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
