@@ -53,7 +53,7 @@ body {
     background-size: cover;
     background-position: center left;
     /* CHANGED: 120s for a faster, yet still smooth pan */
-    animation: panHorizontalSlow 120s linear infinite alternate;
+    animation: panHorizontalSlow 60s linear infinite alternate;
 }
 
 @keyframes panHorizontalSlow {
@@ -76,10 +76,10 @@ body {
     height: 100%;
     z-index: -2;
     /* Lighter opacity (0.4) to let background show */
-    background: rgba(10, 10, 10, 0.4);
+    /* background: rgba(10, 10, 10, 0.4); */
     /* Glassmorphism blur */
-    backdrop-filter: blur(8px) saturate(90%);
-    -webkit-backdrop-filter: blur(8px) saturate(90%);
+    /* backdrop-filter: blur(8px) saturate(90%); */
+    /* -webkit-backdrop-filter: blur(8px) saturate(90%); */
 }
 
 /* --- 2. ATMOSPHERIC PARTICLES --- */
@@ -285,6 +285,8 @@ nav {
 
 .btn-secondary {
     background: var(--mc-stone);
+    padding: 15px 40px;
+    font-size: 1.5rem;
 }
 
 /* --- 6. COUNTDOWN --- */
@@ -702,3 +704,4 @@ footer {
         box-sizing: border-box;
     }
 }
+

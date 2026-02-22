@@ -119,20 +119,22 @@ if (accordions.length > 0) {
 }
 
 // --- 5. MOBILE MENU LOGIC ---
-const hamburger = document.getElementById('hamburger-btn');
-const navLinks = document.getElementById('nav-links');
+// Updated to match CSS classes (.hamburger and .nav-links)
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const links = document.querySelectorAll('.nav-link');
 
 if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
-        // Toggle the navigation menu
+        // Toggle the navigation menu slide-in
         navLinks.classList.toggle('active');
 
         // Toggle the hamburger animation (turn to X)
         hamburger.classList.toggle('toggle');
     });
 
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Close menu when a link is clicked (UX improvement)
+    links.forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             hamburger.classList.remove('toggle');
