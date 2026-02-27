@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | UM Game Jam 2026</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        @keyframes portalPulse {
+            0% { box-shadow: 0 0 10px #8a2be2, inset 0 0 20px #8a2be2; }
+            50% { box-shadow: 0 0 30px #9400d3, inset 0 0 50px #9400d3; }
+            100% { box-shadow: 0 0 10px #8a2be2, inset 0 0 20px #8a2be2; }
+        }
+        
+        .portal-frame {
+            border: 6px solid #222; /* Obsidian-like border */
+            background: linear-gradient(135deg, #2a004f, #6610f2); /* Nether portal purple */
+            padding: 60px 20px;
+            border-radius: 2px;
+            animation: portalPulse 3s infinite;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        /* Swirling particle effect inside the portal */
+        .portal-frame::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: portalSwirl 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes portalSwirl {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="panorama-container">
+        <div class="panorama-image" style="background-image: url('parallax_image.jpg');"></div>
+        <div class="panorama-overlay" style="background: rgba(10, 10, 10, 0.6);"></div>
+    </div>
+
+    <div class="particles-container">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">UM <span>GAME JAM</span></a>
+
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">Handbook</a>
+            <a href="register.html" class="nav-link">Join Server</a>
+        </div>
+    </nav>
+
+    <main class="container" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+        <div class="section-title-wrapper">
+            <h2>Server Gateway</h2>
+        </div>
+
+        <div class="pixel-box" style="max-width: 800px; margin: 0 auto; padding: 30px;">
+            
+            <p style="text-align: center; color: #ccc; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+                You are about to cross into the <strong>UM Game Jam 2026</strong> server. <br>
+                Ensure your party (1-4 members) is ready. You will need a <span style="color: #ffaa00;">RM20 refundable deposit</span> to secure your slot.
+            </p>
+
+            <div class="portal-frame">
+                <h3 style="color: #fff; font-size: 2.2rem; margin-bottom: 15px; text-shadow: 2px 2px 0 #000, 0 0 10px #fff; position: relative; z-index: 1;">
+                    The Portal is Open!
+                </h3>
+                
+                <p style="color: #eee; margin-bottom: 30px; font-size: 1.1rem; text-shadow: 1px 1px 0 #000; position: relative; z-index: 1;">
+                    Click below to open the official registration form in a new tab.
+                </p>
+                
+                <a href="https://forms.gle/E5C3mEfEvS9WAsZ89" target="_blank" rel="noopener noreferrer" class="btn btn-big" style="position: relative; z-index: 1; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                    Enter Portal
+                </a>
+            </div>
+
+            <p style="text-align: center; color: #888; font-size: 0.9rem; margin-top: 30px;">
+                Having trouble connecting? Contact the admins on our <a href="https://discord.gg/yhtC3zuV" style="color: var(--mc-green); text-decoration: underline;">Discord Server</a>.
+            </p>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy;UM Game Jam 2026 Organizers.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -7,6 +7,171 @@
     <title>UM Game Jam 2026</title>
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- MINECRAFT ITEM DROP REVEAL --- */
+        .drop-zone-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .item-drop-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px;
+            height: 280px;
+            /* Fixed height so things don't jump around */
+        }
+
+        /* The invisible vertical track the item falls down */
+        .drop-area {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* The item wrapper that moves down via JS */
+        .mystery-item {
+            position: absolute;
+            top: 0%;
+            /* JS will change this from 0% to 80% */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            transition: top 1s linear;
+            /* Smooth falling */
+        }
+
+        /* The Item Itself (Silhouette State) */
+        .item-sprite {
+            width: 48px;
+            height: 48px;
+            background: #111;
+            /* Dark silhouette */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            /* Simulates a spinning 2D dropped item */
+            animation: slowSpin 4s linear infinite;
+        }
+
+        /* The Ground Shadow */
+        .item-shadow {
+            position: absolute;
+            bottom: 10px;
+            width: 30px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            filter: blur(2px);
+            transition: width 1s linear, opacity 1s linear;
+        }
+
+        /* The Nametag (Hidden by default) */
+        .item-nametag {
+            opacity: 0;
+            transform: translateY(-10px);
+            background: rgba(0, 0, 0, 0.6);
+            /* Classic MC translucent background */
+            border: 2px solid transparent;
+            padding: 8px 12px;
+            border-radius: 2px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #fff;
+            transition: all 0.5s ease;
+            margin-top: 10px;
+        }
+
+        .item-nametag .rarity {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .item-nametag .mutator-name {
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* --- REVEALED / 100% STATE --- */
+        .item-drop-container.unlocked .item-sprite {
+            background: linear-gradient(135deg, #55ff55, #00aa00);
+            /* Vibrant color reveal */
+            border-color: #afffaf;
+            box-shadow: 0 0 25px rgba(85, 255, 85, 0.6);
+            color: transparent;
+            /* Hide the question mark */
+            /* Adds the classic up-and-down idle bob to the spin */
+            animation: slowSpin 4s linear infinite, idleBob 3s ease-in-out infinite;
+        }
+
+        .item-drop-container.unlocked .item-shadow {
+            width: 40px;
+            opacity: 0.8;
+            animation: shadowPulse 3s ease-in-out infinite;
+        }
+
+        .item-drop-container.unlocked .item-nametag {
+            opacity: 1;
+            transform: translateY(0);
+            border-color: rgba(255, 255, 255, 0.2);
+            /* Slight border on reveal */
+        }
+
+        /* Animations */
+        @keyframes slowSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes idleBob {
+
+            0%,
+            100% {
+                margin-top: 0px;
+            }
+
+            50% {
+                margin-top: -15px;
+            }
+
+            /* Floats up slightly */
+        }
+
+        @keyframes shadowPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(0.7);
+                opacity: 0.4;
+            }
+
+            /* Shrinks when item bobs up */
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +200,7 @@
         <div class="nav-links" id="nav-links">
             <a href="index.html" class="nav-link">Home</a>
             <a href="about.html" class="nav-link">Handbook</a>
-            <a href="#register" class="nav-link">Join Server</a>
+            <a href="register.html" class="nav-link">Join Server</a>
         </div>
     </nav>
 
@@ -63,8 +228,8 @@
             </div>
 
             <div>
-                <a href="#register" class="btn btn-big">Start Game</a>
-                <a href="#discord" class="btn btn-secondary">Discord</a>
+                <a href="register.html" class="btn btn-big">Start Game</a>
+                <a href="https://discord.gg/yhtC3zuV" class="btn btn-secondary">Discord</a>
             </div>
         </div>
     </header>
@@ -76,6 +241,57 @@
 
     <main class="container">
 
+        <!-- <section id="challenges" style="margin-top: 40px; margin-bottom: 80px;">
+            <div class="section-title-wrapper">
+                <h2>Mutator Challenges</h2>
+            </div>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
+                Bonus challenges will be revealed randomly during the jam. Keep your eyes peeled!
+            </p>
+
+            <div class="drop-zone-wrapper">
+                <div class="item-drop-container" id="mutator-1">
+                    <div class="drop-area">
+                        <div class="mystery-item">
+                            <div class="item-sprite">?</div>
+                        </div>
+                        <div class="item-shadow"></div>
+                    </div>
+                    <div class="item-nametag">
+                        <span class="rarity" style="color: #ff5555;">[Rare]</span>
+                        <span class="mutator-name">No Jumping Allowed!</span>
+                    </div>
+                </div>
+
+                <div class="item-drop-container" id="mutator-2">
+                    <div class="drop-area">
+                        <div class="mystery-item">
+                            <div class="item-sprite">?</div>
+                        </div>
+                        <div class="item-shadow"></div>
+                    </div>
+                    <div class="item-nametag">
+                        <span class="rarity" style="color: #ffaa00;">[Epic]</span>
+                        <span class="mutator-name">Only 3 Colors Allowed</span>
+                    </div>
+                </div>
+
+                <div class="item-drop-container" id="mutator-3">
+                    <div class="drop-area">
+                        <div class="mystery-item">
+                            <div class="item-sprite">?</div>
+                        </div>
+                        <div class="item-shadow"></div>
+                    </div>
+                    <div class="item-nametag">
+                        <span class="rarity" style="color: #ff55ff;">[Legendary]</span>
+                        <span class="mutator-name">The Game Plays Itself</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </section> -->
         <section id="tracks" style="margin-bottom: 80px;">
             <div class="section-title-wrapper">
                 <h2>Select Class</h2>
@@ -119,7 +335,7 @@
             </div>
         </section>
 
-        <section id="schedule">
+        <section id="schedule" style="margin-bottom: 80px;">
             <div class="section-title-wrapper">
                 <h2>Server Log</h2>
             </div>
@@ -139,7 +355,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 UM Game Jam Organizers.</p>
+        <p>&copy;UM Game Jam 2026 Organizers.</p>
     </footer>
 
     <script src="script.js"></script>

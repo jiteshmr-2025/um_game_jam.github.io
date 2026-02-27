@@ -32,7 +32,7 @@ const timerInterval = setInterval(function () {
         clearInterval(timerInterval);
         const countdownContainer = document.querySelector(".countdown-container");
         if (countdownContainer) {
-            countdownContainer.innerHTML = "<h2>EVENT STARTED</h2>";
+            countdownContainer.innerHTML = "<h2>SET THEME HERE</h2>";
         }
     }
 }, 1000);
@@ -141,3 +141,62 @@ if (hamburger && navLinks) {
         });
     });
 }
+
+// --- 6. PERCENTAGE-BASED MUTATOR CHEST LOGIC ---
+// Define when each chest starts opening, and when it fully opens.
+// --- 6. PERCENTAGE-BASED ITEM DROP LOGIC ---
+const mutatorDates = {
+    "mutator-1": {
+        start: new Date("Feb 25, 2026 12:00:00").getTime(), // Spawns in the sky
+        end: new Date("Mar 01, 2026 12:00:00").getTime()    // Lands and reveals
+    },
+    "mutator-2": {
+        start: new Date("Mar 05, 2026 12:00:00").getTime(),
+        end: new Date("Mar 10, 2026 18:00:00").getTime()
+    },
+    "mutator-3": {
+        start: new Date("Mar 15, 2026 09:00:00").getTime(),
+        end: new Date("Mar 20, 2026 09:00:00").getTime()
+    }
+};
+
+function updateItemDrops() {
+    const now = new Date().getTime();
+    
+    for (const [dropId, dates] of Object.entries(mutatorDates)) {
+        const dropContainer = document.getElementById(dropId);
+        if (!dropContainer) continue;
+
+        let progress = 0;
+        
+        // Calculate progress (0 to 1)
+        if (now >= dates.end) {
+            progress = 1;
+        } else if (now > dates.start) {
+            progress = (now - dates.start) / (dates.end - dates.start);
+        }
+
+        const mysteryItem = dropContainer.querySelector('.mystery-item');
+        const shadow = dropContainer.querySelector('.item-shadow');
+        
+        if (progress < 1) {
+            // Item is falling: maps 0% to 80% down the container
+            if (mysteryItem) mysteryItem.style.top = `${progress * 80}%`;
+            
+            // Shadow gets darker and wider as the item gets closer to the ground
+            if (shadow) {
+                shadow.style.opacity = progress * 0.6;
+                shadow.style.width = `${10 + (progress * 20)}px`;
+            }
+            dropContainer.classList.remove('unlocked');
+        } else {
+            // Item has landed
+            if (mysteryItem) mysteryItem.style.top = `80%`;
+            dropContainer.classList.add('unlocked');
+        }
+    }
+}
+
+// Check immediately, then hook into your existing 1-second interval!
+updateItemDrops();
+/* Add updateItemDrops(); inside your setInterval */
