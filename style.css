@@ -652,6 +652,11 @@ footer {
         /* Show hamburger on mobile */
     }
 
+    .media-partner-grid {
+        grid-template-columns: 1fr; /* Forces the grid into a single column */
+        gap: 40px; /* Reduces the gap slightly so it fits better on small screens */
+    }
+
     .nav-links {
         position: fixed;
         top: 0;
