@@ -165,6 +165,59 @@ nav {
     backdrop-filter: blur(10px);
 }
 
+
+/* --- HERO LOGO STYLING --- */
+.hero-image-logo {
+    max-width: 100%;
+    height: auto;
+    width: 500px; /* Tweak this number to make your logo bigger or smaller */
+    margin-bottom: 20px;
+    /* This adds a hard, blocky shadow similar to Minecraft text shadows */
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.6)); 
+    /* Optional: If your logo is pixel art, this stops it from getting blurry when scaled */
+    image-rendering: pixelated; 
+}
+
+/* --- MEDIA PARTNERS SECTION --- */
+
+/* The container that holds all the partners */
+.media-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 equal columns */
+    gap: 60px 40px; /* 60px vertical gap, 40px horizontal gap */
+    max-width: 900px; /* Keeps the whole section from stretching too wide */
+    margin: 40px auto 0; /* Centers the grid nicely on the page */
+    justify-items: center; /* Centers the logo and text inside their column */
+}
+
+/* The individual partner blocks */
+.media-partner-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Keeps logos aligned at the top even if text wraps below */
+    gap: 16px; 
+    max-width: 300px; /* Forces super long names to wrap to a new line */
+}
+
+/* The partner logos */
+.media-partner-slot img {
+    max-width: 80px; /* Tweak to adjust logo size */
+    max-height: 80px;
+    object-fit: contain; 
+    image-rendering: pixelated; /* Keeps pixel art looking sharp */
+}
+
+/* The text below the logos */
+.media-partner-slot .partner-name {
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8); /* Classic blocky drop shadow */
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
 .logo {
     font-size: 1.5rem;
     color: white;
