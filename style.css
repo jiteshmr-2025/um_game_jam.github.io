@@ -910,3 +910,46 @@ footer {
         box-sizing: border-box;
     }
 }
+
+@media screen and (max-width: 768px) {
+    /* 1. Force whatever container holding your 3 books to stack vertically */
+    /* (I included .book-grid, .server-log, and .grid just in case you used one of those names) */
+    .book-grid, .server-log, .grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px; /* Gives enough space so the tooltips don't overlap the book above it */
+    }
+
+    /* 2. Shrink the paddings and height of the book image */
+    .mc-book {
+        min-height: 380px; /* Prevents it from looking too stretched vertically */
+        padding: 35px 20px 50px 20px; /* Drastically reduces left/right padding */
+    }
+
+    /* 3. Scale down the custom font so it actually fits on the narrower page */
+    .schedule-list {
+        font-size: 0.65rem; /* Shrink font */
+        gap: 12px; /* Pull the rows slightly closer together */
+        padding-left: 10px; 
+        padding-right: 10px;
+    }
+
+    .schedule-list.small-text {
+        font-size: 0.6rem; /* Even smaller for Day 3 */
+    }
+
+    .page-number {
+        font-size: 0.75rem;
+        margin-bottom: 15px;
+        padding-right: 10px;
+    }
+
+    /* 4. Prevent the tooltips from getting cut off on the left edge of the screen */
+    .mc-tooltip-header {
+        left: 0px; 
+        top: -30px;
+        transform: scale(0.9); /* Shrinks the entire tooltip proportionally */
+        transform-origin: top left;
+    }
+}
