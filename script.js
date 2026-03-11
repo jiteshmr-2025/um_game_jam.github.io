@@ -200,3 +200,17 @@ function updateItemDrops() {
 // Check immediately, then hook into your existing 1-second interval!
 updateItemDrops();
 /* Add updateItemDrops(); inside your setInterval */
+
+
+let currentBookPage = 1;
+
+function changePage(direction) {
+    // 1. Hide the current page
+    document.getElementById(`book-${currentBookPage}`).style.display = 'none';
+    
+    // 2. Update the page number (+1 for next, -1 for prev)
+    currentBookPage += direction;
+    
+    // 3. Show the new page
+    document.getElementById(`book-${currentBookPage}`).style.display = 'block';
+}

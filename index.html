@@ -177,7 +177,7 @@
 <body>
 
     <div class="panorama-container">
-        <div class="panorama-image" style="background-image: url('parallax_image.jpg');"></div>
+        <div class="panorama-image" style="background-image: url('images/parallax_image.jpg');"></div>
         <div class="panorama-overlay"></div>
     </div>
 
@@ -207,7 +207,7 @@
     <header class="hero">
         <div class="hero-content">
             <div class="mine-logo-container">
-                <img src="UMGJ Logo.png" alt="UM Game Jam 2026 Logo" class="hero-image-logo">
+                <img src="images/UMGJ Logo.png" alt="UM Game Jam 2026 Logo" class="hero-image-logo">
             </div>
 
             <div class="splash-container">
@@ -344,22 +344,22 @@
 
                 <div class="media-partner-grid">
                     <div class="media-partner-slot">
-                        <img src="partner1.jpg" alt="Partner One Logo">
+                        <img src="images/partner1.jpg" alt="Partner One Logo">
                         <span class="partner-name">APU Game Development Club</span>
                     </div>
 
                     <div class="media-partner-slot">
-                        <img src="partner2.jpg" alt="Partner Two Logo">
+                        <img src="images/partner2.jpg" alt="Partner Two Logo">
                         <span class="partner-name">Computer Science Society of TARUMT</span>
                     </div>
 
                     <div class="media-partner-slot">
-                        <img src="partner3.jpg" alt="Partner Three Logo">
+                        <img src="images/partner3.jpg" alt="Partner Three Logo">
                         <span class="partner-name">Institution of Mechanical Engineering UM</span>
                     </div>
 
                     <div class="media-partner-slot">
-                        <img src="partner4.png" alt="Partner Four Logo">
+                        <img src="images/partner4.png" alt="Partner Four Logo">
                         <span class="partner-name">MYTECH</span>
                     </div>
                 </div>
@@ -370,16 +370,94 @@
             <div class="section-title-wrapper">
                 <h2>Server Log</h2>
             </div>
-            <div class="pixel-box">
-                <ul class="server-log">
-                    <li><span class="log-time">> Day 1 - 18:00</span> <span class="log-event">Opening Ceremony</span>
-                    </li>
-                    <li><span class="log-time">> Day 1 - 19:00</span> <span class="log-event">Team Formation</span></li>
-                    <li><span class="log-time">> Day 2 - 12:00</span> <span class="log-event">Mid-Jam Checkpoint</span>
-                    </li>
-                    <li><span class="log-time">> Day 3 - 16:00</span> <span class="log-event">Submission Deadline</span>
-                    </li>
-                </ul>
+
+            <div class="book-container">
+                <div class="mc-book" id="book-1">
+                    <div class="mc-tooltip-header">
+                        <div class="tooltip-top-row">
+                            <span class="mc-emoji">❤️</span>
+                            <span class="day-text">DAY 1</span>
+                        </div>
+                        <div class="tooltip-desc">Game On</div>
+                    </div>
+                    <div class="page-number">Page 1 of 3</div>
+
+                    <div class="schedule-list">
+                        <div class="schedule-row"><span class="time">2100 - 2115</span><span class="event">Welcoming
+                                Speech</span></div>
+                        <div class="schedule-row"><span class="time">2115 - 2145</span><span class="event">Competition
+                                Briefing</span></div>
+                        <div class="schedule-row"><span class="time">2145 - 2150</span><span class="event">Theme
+                                Reveal</span></div>
+                        <div class="schedule-row"><span class="time">2150 - 2155</span><span class="event">Q&A
+                                Session</span></div>
+                        <div class="schedule-row"><span class="time">2155 - 2200</span><span class="event">Photo
+                                Session</span></div>
+                    </div>
+
+                    <div class="date-glow glow-orange">15 APRIL</div>
+
+                    <div class="nav-btn next-btn" onclick="changePage(1)"></div>
+                </div>
+
+                <div class="mc-book" id="book-2" style="display: none;">
+                    <div class="mc-tooltip-header">
+                        <div class="tooltip-top-row">
+                            <span class="mc-emoji">🟫</span>
+                            <span class="day-text">DAY 2</span>
+                        </div>
+                        <div class="tooltip-desc">Building Block</div>
+                    </div>
+                    <div class="page-number">Page 2 of 3</div>
+
+                    <div class="schedule-list">
+                        <div class="schedule-row"><span class="time">0000 - 2359</span><span
+                                class="event">Developing<br>Period</span></div>
+                        <div class="schedule-row" style="margin-top: 20px;"><span class="time">2359</span><span
+                                class="event">Submission<br>Deadline</span></div>
+                    </div>
+
+                    <div class="date-glow glow-teal">18 APRIL</div>
+
+                    <div class="nav-btn prev-btn" onclick="changePage(-1)"></div>
+                    <div class="nav-btn next-btn" onclick="changePage(1)"></div>
+                </div>
+
+                <div class="mc-book" id="book-3" style="display: none;">
+                    <div class="mc-tooltip-header">
+                        <div class="tooltip-top-row">
+                            <span class="mc-emoji">🗡️</span>
+                            <span class="day-text">DAY 3</span>
+                        </div>
+                        <div class="tooltip-desc">The Big Reveal</div>
+                    </div>
+                    <div class="page-number">Page 3 of 3</div>
+
+                    <div class="schedule-list small-text">
+                        <div class="schedule-row"><span class="time">0800 - 0900</span><span
+                                class="event">Registration</span></div>
+                        <div class="schedule-row"><span class="time">0900 - 0930</span><span class="event">Opening
+                                Ceremony</span></div>
+                        <div class="schedule-row"><span class="time">0930 - 1000</span><span class="event">Pitching
+                                Preparation</span></div>
+                        <div class="schedule-row"><span class="time">1000 - 1200</span><span class="event">Pitching
+                                Session I</span></div>
+                        <div class="schedule-row"><span class="time">1200 - 1300</span><span class="event">Lunch
+                                Break</span></div>
+                        <div class="schedule-row"><span class="time">1300 - 1500</span><span class="event">Pitching
+                                Session II</span></div>
+                        <div class="schedule-row"><span class="time">1500 - 1530</span><span class="event">Break</span>
+                        </div>
+                        <div class="schedule-row"><span class="time">1530 - 1600</span><span class="event">Closing
+                                Remarks</span></div>
+                        <div class="schedule-row"><span class="time">1600 - 1700</span><span class="event">Prize Giving
+                                Ceremony</span></div>
+                    </div>
+
+                    <div class="date-glow glow-purple">19 APRIL</div>
+
+                    <div class="nav-btn prev-btn" onclick="changePage(-1)"></div>
+                </div>
             </div>
         </section>
 

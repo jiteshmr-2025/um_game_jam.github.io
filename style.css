@@ -35,6 +35,13 @@ body {
     overflow-x: hidden;
 }
 
+@font-face {
+    font-family: 'Minecraftia';
+    src: url('Minecraftia-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* --- 1. PANORAMA & GLASSMORPHISM --- */
 .panorama-container {
     position: fixed;
@@ -170,12 +177,13 @@ nav {
 .hero-image-logo {
     max-width: 100%;
     height: auto;
-    width: 500px; /* Tweak this number to make your logo bigger or smaller */
+    width: 500px;
+    /* Tweak this number to make your logo bigger or smaller */
     margin-bottom: 20px;
     /* This adds a hard, blocky shadow similar to Minecraft text shadows */
-    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.6)); 
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.6));
     /* Optional: If your logo is pixel art, this stops it from getting blurry when scaled */
-    image-rendering: pixelated; 
+    image-rendering: pixelated;
 }
 
 /* --- MEDIA PARTNERS SECTION --- */
@@ -183,11 +191,16 @@ nav {
 /* The container that holds all the partners */
 .media-partner-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 equal columns */
-    gap: 60px 40px; /* 60px vertical gap, 40px horizontal gap */
-    max-width: 900px; /* Keeps the whole section from stretching too wide */
-    margin: 40px auto 0; /* Centers the grid nicely on the page */
-    justify-items: center; /* Centers the logo and text inside their column */
+    grid-template-columns: repeat(2, 1fr);
+    /* Forces exactly 2 equal columns */
+    gap: 60px 40px;
+    /* 60px vertical gap, 40px horizontal gap */
+    max-width: 900px;
+    /* Keeps the whole section from stretching too wide */
+    margin: 40px auto 0;
+    /* Centers the grid nicely on the page */
+    justify-items: center;
+    /* Centers the logo and text inside their column */
 }
 
 /* The individual partner blocks */
@@ -195,24 +208,29 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Keeps logos aligned at the top even if text wraps below */
-    gap: 16px; 
-    max-width: 300px; /* Forces super long names to wrap to a new line */
+    justify-content: flex-start;
+    /* Keeps logos aligned at the top even if text wraps below */
+    gap: 16px;
+    max-width: 300px;
+    /* Forces super long names to wrap to a new line */
 }
 
 /* The partner logos */
 .media-partner-slot img {
-    max-width: 80px; /* Tweak to adjust logo size */
+    max-width: 80px;
+    /* Tweak to adjust logo size */
     max-height: 80px;
-    object-fit: contain; 
-    image-rendering: pixelated; /* Keeps pixel art looking sharp */
+    object-fit: contain;
+    image-rendering: pixelated;
+    /* Keeps pixel art looking sharp */
 }
 
 /* The text below the logos */
 .media-partner-slot .partner-name {
     font-size: 0.9rem;
     color: #ffffff;
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8); /* Classic blocky drop shadow */
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+    /* Classic blocky drop shadow */
     text-align: center;
     letter-spacing: 1px;
 }
@@ -507,9 +525,179 @@ h2 {
     font-family: sans-serif;
 }
 
-/* --- 9. ABOUT PAGE (READABILITY FIX) --- */
+/* --- SINGLE BOOK CONTAINER --- */
+.book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto 0;
+    max-width: 450px;
+    width: 100%;
+}
+
+/* --- INVISIBLE NAV BUTTONS --- */
+.nav-btn {
+    position: absolute;
+    bottom: 30px;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 20;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.prev-btn {
+    left: 80px;
+}
+
+.next-btn {
+    right: 80px;
+}
+
+/* --- THE ACTUAL MINECRAFT BOOK BACKGROUND --- */
+.mc-book {
+    position: relative;
+    width: 100%;
+    background-image: url('images/book-image.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 45px 35px 70px 35px;
+    min-height: 450px;
+    image-rendering: pixelated;
+}
+
+.mc-book::before {
+    display: none;
+}
+
+/* --- TOOLTIP STYLING (Matched to Canva, using Emojis) --- */
+.mc-tooltip-header {
+    position: absolute;
+    top: -25px;
+    left: -15px;
+    background: #181818; /* Dark grey background */
+    border: 2px solid #4a4a4a; /* Inner grey border */
+    /* Outer black border and drop shadow */
+    box-shadow: 0 0 0 2px #000000, 4px 4px 0px rgba(0,0,0,0.5); 
+    border-radius: 2px;
+    padding: 8px 14px;
+    z-index: 10;
+    min-width: 140px;
+}
+
+.tooltip-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+/* New rule specifically for the emoji size and alignment */
+.mc-emoji {
+    font-size: 1.1rem; 
+    line-height: 1;
+    filter: drop-shadow(2px 2px 0px #000); 
+    
+    /* THE FIX: Nudges the emoji up to align with the text */
+    position: relative;
+    top: -8px; /* Change this to -3px or -1px if it needs more/less adjusting */
+}
+
+.day-text {
+    font-family: 'Minecraftia', sans-serif;
+    color: #FFAA00; /* Minecraft Gold */
+    font-size: 1rem;
+    text-shadow: 2px 2px 0px #3F2B00; 
+    line-height: 1;
+    -webkit-font-smoothing: none;
+}
+
+.tooltip-desc {
+    font-family: 'Minecraftia', sans-serif;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    text-shadow: 2px 2px 0px #000;
+    -webkit-font-smoothing: none; /* Forces crisp pixels */
+}
+
+/* --- PAGE NUMBERS & SCHEDULE CONTENT --- */
+.page-number {
+    font-family: 'Minecraftia', sans-serif;
+    -webkit-font-smoothing: none;
+    text-align: right;
+    color: #000;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    padding-right: 20px;
+}
+
+.schedule-list {
+    font-family: 'Minecraftia', sans-serif;
+    -webkit-font-smoothing: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #000;
+    font-size: 0.8rem;
+    padding-left: 25px;
+    padding-right: 20px;
+}
+
+.schedule-list.small-text {
+    font-size: 0.85rem;
+    gap: 10px;
+}
+
+.schedule-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule-row .time {
+    width: 45%;
+    font-weight: bold;
+}
+
+.schedule-row .event {
+    width: 55%;
+    text-align: right;
+}
+
+/* --- GLOWING FOOTER DATES --- */
+.date-glow {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 2.2rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+.glow-orange {
+    text-shadow: 0 0 15px #ffaa00, 3px 3px 0 #000;
+}
+
+.glow-teal {
+    text-shadow: 0 0 15px #55ffff, 3px 3px 0 #000;
+}
+
+.glow-purple {
+    text-shadow: 0 0 15px #aa00aa, 3px 3px 0 #000;
+}
+
+/* --- ABOUT PAGE (READABILITY FIX) --- */
 .handbook-content {
-    /* Standard font for better reading experience */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
@@ -521,11 +709,12 @@ h2 {
 }
 
 .handbook-content h3 {
-    font-family: 'Minecraft', sans-serif;
+    font-family: 'Minecraftia', sans-serif;
+    /* Updated to use your new font */
     margin-top: 30px;
 }
 
-/* --- 10. FOOTER --- */
+/* --- FOOTER --- */
 footer {
     background: #111;
     text-align: center;
@@ -533,21 +722,6 @@ footer {
     border-top: 4px solid var(--mc-dirt);
     margin-top: auto;
     width: 100%;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .server-log li {
-        flex-direction: column;
-        gap: 5px;
-    }
 }
 
 /* --- FAQ ACCORDION STYLES --- */
@@ -566,28 +740,24 @@ footer {
     border-bottom: none;
     outline: none;
     transition: 0.2s;
-    font-family: 'Minecraft', sans-serif;
-    /* Keep headers in pixel font */
+    font-family: 'Minecraftia', sans-serif;
+    /* Updated to use your new font */
     font-size: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Add a bottom border to the last one */
 .accordion:last-of-type {
     border-bottom: 1px solid #444;
 }
 
-/* Active state (when open) */
 .active,
 .accordion:hover {
     background-color: rgba(94, 173, 85, 0.1);
-    /* Slight green tint */
     color: var(--mc-green);
 }
 
-/* The arrow icon */
 .accordion:after {
     content: '>';
     font-weight: bold;
@@ -597,7 +767,6 @@ footer {
 
 .active:after {
     transform: rotate(90deg);
-    /* Rotate arrow down */
 }
 
 .panel {
@@ -607,14 +776,12 @@ footer {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     border-left: 2px solid var(--mc-green);
-    /* Visual indicator on left */
     border-right: 1px solid #333;
 }
 
 .panel p {
     margin: 15px 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Readable font */
     font-size: 0.95rem;
     color: #ccc;
 }
@@ -622,16 +789,12 @@ footer {
 /* =========================================
    MOBILE & TABLET CONFIGURATIONS
    ========================================= */
-
-/* 1. HAMBURGER ICON STYLES (Hidden on Desktop) */
 .hamburger {
     display: none;
-    /* Hidden by default */
     cursor: pointer;
     flex-direction: column;
     gap: 5px;
     z-index: 200;
-    /* Above everything */
 }
 
 .bar {
@@ -639,22 +802,22 @@ footer {
     height: 4px;
     background-color: white;
     box-shadow: 2px 2px 0 #000;
-    /* Minecraft shadow */
     transition: 0.3s;
 }
 
-/* 2. MEDIA QUERY (Tablets and Phones - Max Width 768px) */
 @media screen and (max-width: 768px) {
-
-    /* --- NAVIGATION SIDEBAR --- */
     .hamburger {
         display: flex;
-        /* Show hamburger on mobile */
+    }
+
+    /* Fixed the old .book-grid to target the new .book-container instead */
+    .book-container {
+        max-width: 90%;
     }
 
     .media-partner-grid {
-        grid-template-columns: 1fr; /* Forces the grid into a single column */
-        gap: 40px; /* Reduces the gap slightly so it fits better on small screens */
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .nav-links {
@@ -663,25 +826,19 @@ footer {
         right: 0;
         height: 100vh;
         width: 70%;
-        /* Takes up 70% of screen */
         background-color: #1a1818;
-        /* Dark background */
         border-left: 4px solid var(--mc-green);
         box-shadow: -10px 0 20px rgba(0, 0, 0, 0.8);
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 30px;
-
-        /* Animation: Slide out by default */
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         z-index: 150;
     }
 
-    /* Class added via JS to show menu */
     .nav-links.active {
         transform: translateX(0%);
     }
@@ -695,7 +852,6 @@ footer {
         border-bottom: 1px dashed #333;
     }
 
-    /* Animation for Hamburger turning into 'X' */
     .hamburger.toggle .bar:nth-child(1) {
         transform: rotate(-45deg) translate(-6px, 6px);
         background-color: var(--mc-green);
@@ -710,9 +866,6 @@ footer {
         background-color: var(--mc-green);
     }
 
-    /* --- LAYOUT ADJUSTMENTS --- */
-
-    /* Hero Section Text */
     .mine-logo {
         font-size: 2.5rem;
     }
@@ -722,7 +875,6 @@ footer {
         padding: 0 20px;
     }
 
-    /* Countdown boxes stack or get smaller */
     .countdown-container {
         gap: 10px;
     }
@@ -736,22 +888,18 @@ footer {
         font-size: 1.5rem;
     }
 
-    /* Grid becomes 1 column */
     .grid {
         grid-template-columns: 1fr;
     }
 
-    /* Padding adjustments */
     .container {
         padding: 40px 15px;
     }
 
-    /* Hide particles on mobile to save battery/performance */
     .particles-container {
         display: none;
     }
 
-    /* Make buttons full width */
     .hero-buttons {
         flex-direction: column;
         width: 100%;
@@ -762,4 +910,3 @@ footer {
         box-sizing: border-box;
     }
 }
-
