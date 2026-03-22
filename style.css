@@ -189,7 +189,7 @@ nav {
 /* --- MEDIA PARTNERS SECTION --- */
 
 /* The container that holds all the partners */
-.media-partner-grid {
+.media-partner-grid, .sponsor-grid {
     display: grid;
     /* Changed from 2 to 4 columns */
     grid-template-columns: repeat(4, 1fr); 
@@ -200,7 +200,7 @@ nav {
     justify-items: center;
 }
 
-.media-partner-slot {
+.media-partner-slot, .sponsor-slot {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -216,20 +216,20 @@ nav {
 
 /* On tablet screens, drop back down to 2 columns */
 @media (max-width: 900px) {
-    .media-partner-grid {
+    .media-partner-grid, .sponsor-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* On mobile phones, stack them in 1 single column */
 @media (max-width: 600px) {
-    .media-partner-grid {
+    .media-partner-grid, .sponsor-grid {
         grid-template-columns: 1fr;
     }
 }
 
 /* The partner logos */
-.media-partner-slot img {
+.media-partner-slot img, .sponsor-slot img {
     max-width: 80px;
     /* Tweak to adjust logo size */
     max-height: 80px;
@@ -239,7 +239,7 @@ nav {
 }
 
 /* The text below the logos */
-.media-partner-slot .partner-name {
+.media-partner-slot .partner-name, .sponsor-slot .partner-name {
     font-size: 0.9rem;
     color: #ffffff;
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
@@ -467,26 +467,6 @@ h2 {
 
 .gold {
     background: #ffff55;
-}
-
-/* Sponsors */
-.sponsor-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.sponsor-slot {
-    width: 140px;
-    height: 80px;
-    background: #1a1818;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed #444;
-    color: #555;
-    font-size: 0.8rem;
 }
 
 /* Schedule */
@@ -833,7 +813,7 @@ footer {
         max-width: 90%;
     }
 
-    .media-partner-grid {
+    .media-partner-grid, .sponsor-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
