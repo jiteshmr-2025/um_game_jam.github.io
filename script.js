@@ -1,6 +1,6 @@
 // --- 1. COUNTDOWN LOGIC ---
 // Target Date: April 15, 2026, 9:45 PM
-const countDownDate = new Date("Apr 15, 2026 21:45:00").getTime();
+const countDownDate = new Date("Apr 18, 2026 11:59:00").getTime();
 
 // Update the count down every 1 second
 const timerInterval = setInterval(function () {
