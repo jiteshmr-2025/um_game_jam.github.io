@@ -1,6 +1,6 @@
 // --- 1. COUNTDOWN LOGIC ---
 // Target Date: April 15, 2026, 9:45 PM
-const countDownDate = new Date("Apr 18, 2026 11:59:00").getTime();
+const countDownDate = new Date("Apr 18, 2026, 11:59:59").getTime();
 
 // Update the count down every 1 second
 const timerInterval = setInterval(function () {
@@ -32,7 +32,7 @@ const timerInterval = setInterval(function () {
         clearInterval(timerInterval);
         const countdownContainer = document.querySelector(".countdown-container");
         if (countdownContainer) {
-            countdownContainer.innerHTML = "<h2>SET THEME HERE</h2>";
+            countdownContainer.innerHTML = "<h2>SUBMISSIONS ARE CLOSED.</h2>";
         }
     }
 }, 1000);
